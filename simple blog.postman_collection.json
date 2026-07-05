@@ -1,0 +1,374 @@
+{
+  "info": {
+    "_postman_id": "5ba00cd8-2f71-4f9c-9d09-ef5ec0e0b083",
+    "name": "simple blog",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43450534",
+    "_collection_link": "https://go.postman.co/collection/43450534-5ba00cd8-2f71-4f9c-9d09-ef5ec0e0b083?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "create new post",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"<h1>Example blogs</h1>\",\n    \"content\" : \"<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <br> Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>\"\n  \n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/posts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "posts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get post",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/posts/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "posts",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get post list",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"<h1>Peler</h1>\",\n    \"content\" : \"<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <br> Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>\",\n    \"author_id\": 1\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/posts?page=1&per_page=2&order=DESC&order_by=title",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "posts"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "per_page",
+              "value": "2"
+            },
+            {
+              "key": "order",
+              "value": "DESC"
+            },
+            {
+              "key": "order_by",
+              "value": "title"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update post",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"<h1>exapmolez</h1>\",\n    \"content\" : \"<p><br>Pellentesque aqaosndfoano, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <br> Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/posts/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "posts",
+            ":id"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "8"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "delete blog post",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/posts/:id",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "posts",
+            ":id"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "",
+              "disabled": true
+            }
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "5"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "new comment",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"content\" : \"<p>waoijfoeawjfoajwfowaj<br>oaifiwajo</p>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/posts/:id/comments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "posts",
+            ":id",
+            "comments"
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "2"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "get comments",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"content\" : \"waoijfoeawjfoajwfowajoaifiwajo\",\n    \"author_id\": 9\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/posts/:id/comments",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "posts",
+            ":id",
+            "comments"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "1",
+              "disabled": true
+            },
+            {
+              "key": "per_page",
+              "value": "2",
+              "disabled": true
+            },
+            {
+              "key": "order",
+              "value": "DESC",
+              "disabled": true
+            },
+            {
+              "key": "order_by",
+              "value": "content",
+              "disabled": true
+            }
+          ],
+          "variable": [
+            {
+              "key": "id",
+              "value": "50"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "register",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"name\":\"brian samasmasmsamas\",\n    \"email\" : \"brian4@gmail.com\",\n    \"password\": \"R0cky*901\"//must be between 8 and 72 character\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "log in",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"email\":\"brian3@gmail.com\",\n    \"password\":\"R0cky*901\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3ODMyNTA2OTgsImlhdCI6MTc4MzI0NzA5OCwiaXNzIjoic2ltcGxlLWJsb2ctdjEiLCJuYW1lIjoiIiwic3ViIjoiMiJ9.We2RMqnNDqaeO8Cd4-283YLjJg8xE9eyAE5M5OXfjK4",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
