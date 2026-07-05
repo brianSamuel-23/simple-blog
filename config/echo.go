@@ -20,6 +20,8 @@ type publicRoute struct{ method, path string }
 
 var publicRoutes = []publicRoute{
 	{http.MethodPost, "/register"},
+	{http.MethodGet, "/posts"},
+	{http.MethodGet, "/posts/:id"},
 	{http.MethodGet, "/posts/:id/comments"},
 	{http.MethodPost, "/posts/:id/comments"},
 	{http.MethodPost, "/login"},
@@ -76,7 +78,18 @@ func NewEcho() *echo.Echo {
 	e.Use(echojwt.WithConfig(echojwt.Config{
 		SigningKey:    []byte(jwtSecret()),
 		SigningMethod: echojwt.AlgorithmHS256,
-		Skipper:       shouldSkipAuth,
+		Skipper:       func(c echo.Context) bool { return c.Request().URL.Path == "/healthz" },
+		ErrorHandler: func(c echo.Context, err error) error {
+			if shouldSkipAuth(c) {
+				return nil
+			}
+			var parsingErr *echojwt.TokenParsingError
+			if errors.As(err, &parsingErr) {
+				return echojwt.ErrJWTInvalid.WithInternal(err)
+			}
+			return echojwt.ErrJWTMissing.WithInternal(err)
+		},
+		ContinueOnIgnoredError: true,
 	}))
 
 	e.Use(userContextMiddleware())
@@ -109,12 +122,11 @@ func claimsFromContext(c echo.Context) (jwt.MapClaims, bool) {
 func userContextMiddleware() echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			if shouldSkipAuth(c) {
-				return next(c)
-			}
-
 			claims, ok := claimsFromContext(c)
 			if !ok {
+				if shouldSkipAuth(c) {
+					return next(c)
+				}
 				return echo.NewHTTPError(http.StatusUnauthorized, "No token found")
 			}
 

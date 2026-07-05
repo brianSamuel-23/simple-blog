@@ -12,7 +12,6 @@ import (
 )
 
 func main() {
-
 	db := config.NewMysql()
 
 	repo := mysql.New(db)

@@ -22,9 +22,9 @@ func NewMysql() *gorm.DB {
 
 	logLevel := logger.Info
 
-	// if !getEnvBool("APP_DEBUG", false) {
-	// 	logLevel = logger.Silent
-	// }
+	if !getEnvBool("APP_DEBUG", false) {
+		logLevel = logger.Silent
+	}
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logLevel),
